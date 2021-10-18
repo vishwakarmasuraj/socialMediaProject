@@ -10,7 +10,7 @@ const errorHandler = (res, message, error) => {
 
 const errorSecondMethod = (req, res) => {
     if (typeof (err) === 'string') {
-        return res.status(400).json({ message, error })
+        return res.status(400).json({ message: err })
     }
     if (err.name === 'validationError') {
         return res.status(400).json({ message: err.message });
