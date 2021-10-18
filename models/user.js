@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
         type: Array,
         required: true
     },
-    hobby: {
+    hobbies: {
         type: Array,
         required: true
     },
