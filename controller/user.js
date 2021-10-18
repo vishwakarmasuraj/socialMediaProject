@@ -35,8 +35,8 @@ const userListing = async (req, res) => {
 }
 
 generateToken = (user) => {
-    return jwt.sign({ data: user }, constants.TOKEN_SECRET, {
-        expiresIn: '24h',
+    return jwt.sign({ data: user }, process.env.SECRETKEY, {
+        expiresIn: '1minute',
     })
 }
 
