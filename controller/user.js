@@ -5,8 +5,11 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 
-
-
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 
 
 const addUser = async (req, res) => {
@@ -31,6 +34,38 @@ const userListing = async (req, res) => {
     }
 }
 
+generateToken = (user) => {
+    return jwt.sign({ data: user }, constants.TOKEN_SECRET, {
+        expiresIn: '24h',
+    })
+}
+
+const userLogin = async (req, res) => {
+    try {
+        let data = await User.findOne({ email: req.body.email })
+        if (!data) {
+            return errorHandler(res, constants.EMAILLOGIN_ERR)
+        } else {
+            await bcrypt.compare(req.body.password, data.password, (error, match) => {
+                if (error) {
+                    return errorHandler(res, constants.ERROR_MSG, error)
+                } else if (match) {
+                    return successHandler(res, constants.SUCCESSLOGIN, {
+                        token: generateToken(data),
+                        data,
+                    })
+                } else {
+                    return errorHandler(res, constants.LOGINPASSFAIL)
+                }
+            })
+        }
+    } catch (error) {
+        console.log(error)
+        errorHandler(res)
+    }
+}
+
+
 const userTruncate = async (req, res) => {
     try {
         await User.remove({})
@@ -41,4 +76,4 @@ const userTruncate = async (req, res) => {
     }
 }
 
-module.exports = { addUser, userListing, userTruncate }
+module.exports = { addUser, userListing, userTruncate, userLogin }

@@ -10,6 +10,8 @@ router.post('/api/signup', userValidateRule.validationRule(), valid.validate, us
 
 router.get('/api/list', userController.userListing)
 
+router.post('/api/login', userController.userLogin)
+
 router.delete('/truncate', userController.userTruncate)
 
 module.exports = router

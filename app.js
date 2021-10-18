@@ -12,7 +12,7 @@ app.use(bodyParser.json())
 app.use(routes)
 
 mongoose.connect(process.env.DATABASE_CONNECTION).then(() => {
-    console.log('connection successfully')
+    console.log('connected successfully')
 })
 
 app.listen(port, () => console.log(`Server is listening at ${ port }`))
