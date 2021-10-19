@@ -12,6 +12,8 @@ router.get('/api/list', userController.userListing)
 
 router.post('/api/login', userController.userLogin)
 
+router.get('/findAllRecord', userController.searchAnotherUserRecord)
+
 router.delete('/truncate', userController.userTruncate)
 
 module.exports = router

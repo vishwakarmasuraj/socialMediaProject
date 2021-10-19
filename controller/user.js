@@ -36,7 +36,7 @@ const userListing = async (req, res) => {
 
 generateToken = (user) => {
     return jwt.sign({ data: user }, process.env.SECRETKEY, {
-        expiresIn: '1minute',
+        expiresIn: '24h',
     })
 }
 
@@ -65,6 +65,25 @@ const userLogin = async (req, res) => {
     }
 }
 
+const searchAnotherUserRecord = async (req, res) => {
+    try {
+        const { search } = req.query || ''
+        const result = await User.find({
+            $or: [
+                { $or: [{ firstName: req.query.firstName }] },
+                { $or: [{ lastName: req.query.lastName }] },
+                { $or: [{ email: req.query.email }] },
+                { $or: [{ hobbies: req.query.hobbies }] },
+                { $or: [{ interest: req.query.interest }] },
+            ]
+        })
+        res.status(200).json({ msg: 'found record', result })
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ msg: 'something went wrong' })
+    }
+}
+
 
 const userTruncate = async (req, res) => {
     try {
@@ -76,4 +95,4 @@ const userTruncate = async (req, res) => {
     }
 }
 
-module.exports = { addUser, userListing, userTruncate, userLogin }
+module.exports = { addUser, userListing, userTruncate, userLogin, searchAnotherUserRecord }

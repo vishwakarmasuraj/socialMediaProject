@@ -4,6 +4,7 @@ const User = require('../models/user')
 
 const validationRule = () => {
     return [
+        body('title').notEmpty(),
         body('firstName').notEmpty()
             .custom(value => {
                 return User.findOne({ firstName: value }).then(data => {
