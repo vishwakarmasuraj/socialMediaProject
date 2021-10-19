@@ -67,7 +67,6 @@ const userLogin = async (req, res) => {
 
 const searchAnotherUserRecord = async (req, res) => {
     try {
-        const { search } = req.query || ''
         const result = await User.find({
             $or: [
                 { $or: [{ firstName: req.query.firstName }] },
@@ -77,7 +76,7 @@ const searchAnotherUserRecord = async (req, res) => {
                 { $or: [{ interest: req.query.interest }] },
             ]
         })
-        successHandler(res, constants.SUCCESS_SEARCHING_MSG)
+        successHandler(res, constants.SUCCESS_SEARCHING_MSG, result)
     } catch (error) {
         console.error(error)
         errorHandler(res)
