@@ -77,10 +77,10 @@ const searchAnotherUserRecord = async (req, res) => {
                 { $or: [{ interest: req.query.interest }] },
             ]
         })
-        res.status(200).json({ msg: 'found record', result })
+        successHandler(res, constants.SUCCESS_SEARCHING_MSG)
     } catch (error) {
         console.error(error)
-        res.status(500).json({ msg: 'something went wrong' })
+        errorHandler(res)
     }
 }
 
