@@ -7,7 +7,8 @@ const friendSchema = new Schema({
     status: {
         type: String,
         required: true,
-        enum: ['Open', 'Close', 'Decline', 'Accept']
+        enum: ['Open', 'Close', 'Decline', 'Accept'],
+        default: 'Open'
     },
     message: {
         type: String
