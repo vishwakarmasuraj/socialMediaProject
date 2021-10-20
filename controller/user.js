@@ -80,6 +80,7 @@ const searchAnotherUserRecord = async (req, res) => {
     }
 }
 
+
 const userTruncate = async (req, res) => {
     try {
         await User.remove({})

@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
-const Schema = mongoose.Schema
 
-const friend = new Schema({
+const Friend = new mongoose.Schema({
     id: {
         type: Schema.Types.ObjectId,
         required: true
@@ -17,4 +16,4 @@ const friend = new Schema({
     }]
 }, { timestamps: true })
 
-module.exports = mongoose.model('Friend', friend)
+module.exports = mongoose.model('Friend', Friend)
