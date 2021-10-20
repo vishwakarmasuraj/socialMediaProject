@@ -64,7 +64,7 @@ const userLogin = async (req, res) => {
 
 const searchAnotherUserRecord = async (req, res) => {
     try {
-        let { search } = req.query
+        let { search = "" } = req.query
         const result = await User.find({
             $or: [
                 { $or: [{ firstName: { $regex: `${ search }`, $options: 'i' } }] },
