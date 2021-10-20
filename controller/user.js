@@ -19,8 +19,7 @@ const addUser = async (req, res) => {
         await user.save()
         successHandler(res, constants.USER_CREATED_MSG)
     } catch (error) {
-        console.error(error)
-        errorHandler(res)
+        errorHandler(res, error)
     }
 }
 
@@ -29,8 +28,7 @@ const userListing = async (req, res) => {
         const result = await User.find({})
         successHandler(res, constants.GET_LISTING, result)
     } catch (error) {
-        console.error(error)
-        errorHandler(res)
+        errorHandler(res, error)
     }
 }
 
@@ -60,39 +58,34 @@ const userLogin = async (req, res) => {
             })
         }
     } catch (error) {
-        console.log(error)
-        errorHandler(res)
+        errorHandler(res, error)
     }
 }
 
 const searchAnotherUserRecord = async (req, res) => {
     try {
-        console.log(req.query)
         let { search } = req.query
         const result = await User.find({
             $or: [
-                { $or: [{ firstName: search }] },
-                { $or: [{ lastName: search }] },
+                { $or: [{ firstName: { $regex: `${ search }`, $options: 'i' } }] },
+                { $or: [{ lastName: { $regex: `${ search }`, $options: 'i' } }] },
                 { $or: [{ email: search }] },
                 { $or: [{ interest: search }] },
-                { $or: [{ hobbies: search }] },
+                { $or: [{ hobbies: { $in: [search] } }] },
             ]
         })
         successHandler(res, constants.SUCCESS_SEARCHING_MSG, result)
     } catch (error) {
-        console.error(error)
-        errorHandler(res)
+        errorHandler(res, error)
     }
 }
-
 
 const userTruncate = async (req, res) => {
     try {
         await User.remove({})
         successHandler(res, constants.TRUNCATE_SUCC_MSG)
     } catch (error) {
-        console.error(error)
-        errorHandler(res)
+        errorHandler(res, error)
     }
 }
 
