@@ -6,6 +6,7 @@ const constants = {
     ERROR_MSG: 'Email is not match',
     SUCCESSLOGIN: 'User Logged in',
     LOGINPASSFAIL: 'Login fail',
+    SUCCESS_VERIFY_MSG: 'Token verified successfully',
     SUCCESS_SEARCHING_MSG: 'Found record',
     TRUNCATE_SUCC_MSG: 'Truncate record successfully'
 }
