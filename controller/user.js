@@ -4,7 +4,6 @@ const constants = require('../constant/user')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-
 /**
  * 
  * @param {*} req 
@@ -91,6 +90,8 @@ const verifyToken = async (req, res, next) => {
         return res.status(404).json({ message: 'Invalid token' })
     }
 }
+
+
 
 
 const userTruncate = async (req, res) => {
