@@ -15,4 +15,15 @@ const verifyToken = async (req, res, next) => {
     }
 }
 
-module.exports = { verifyToken }
+const sendFriendRequest = async (req, res) => {
+    try {
+        console.log(req.body)
+        const result = await new FriendRequest(req.body)
+        console.log(result)
+        res.status(200).json({ message: 'Friend request sent successfully', result })
+    } catch (error) {
+        return res.status(500).json({ message: 'something went wrong' })
+    }
+}
+
+module.exports = { verifyToken, sendFriendRequest }

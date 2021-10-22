@@ -92,19 +92,6 @@ const verifyToken = async (req, res, next) => {
 }
 
 
-const userLogout = async (req, res) => {
-    try {
-        console.log(req.params.token)
-        let { token } = req.query
-        const result = await User.findOneAndRemove({ token: req.params.token })
-        res.status(200).json({ message: 'logout successfully', result })
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json({ msg: 'something went wrong' })
-    }
-}
-
-
 const userTruncate = async (req, res) => {
     try {
         await User.remove({})
@@ -114,4 +101,4 @@ const userTruncate = async (req, res) => {
     }
 }
 
-module.exports = { addUser, userListing, userTruncate, userLogin, searchAnotherUserRecord, verifyToken, userLogout }
+module.exports = { addUser, userListing, userTruncate, userLogin, searchAnotherUserRecord, verifyToken }

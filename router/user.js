@@ -16,8 +16,6 @@ router.get('/findAllRecord', userController.searchAnotherUserRecord)
 
 router.get('/verify', userController.verifyToken)
 
-router.post('/logout', userController.userLogout)
-
 router.delete('/truncate', userController.userTruncate)
 
 module.exports = router
