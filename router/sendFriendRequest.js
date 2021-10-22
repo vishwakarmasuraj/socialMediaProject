@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 
 
+
+const userVerifyToken = require('../middleware/tokenVerify')
 const requestValidateRule = require('../middleware/sendRequest')
 const requestValid = require('../middleware/valid')
 
@@ -9,7 +11,6 @@ const userController = require('../controller/sendFriendRequest')
 
 
 
-router.get('/verifyJust', userController.verifyToken)
 
 router.post('/requestSend', requestValidateRule.sendRequestValidationRule(), requestValid.validate, userController.sendFriendRequest)
 
