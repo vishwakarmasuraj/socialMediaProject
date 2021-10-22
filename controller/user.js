@@ -1,6 +1,6 @@
 const User = require('../models/user')
 const { successHandler, errorHandler } = require('../helper/responseHandler')
-const constants = require('../constant/user')
+const constants = require('../constant/allConstants')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 

@@ -1,5 +1,5 @@
 const { successHandler, errorHandler } = require('../helper/responseHandler')
-const constants = require('../constant/user')
+const constants = require('../constant/allConstants')
 const jwt = require('jsonwebtoken')
 
 const verifyToken = async (req, res, next) => {
