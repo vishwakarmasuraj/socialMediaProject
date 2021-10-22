@@ -24,9 +24,9 @@ const sendFriendRequest = async (req, res) => {
 
 const friendRequestListing = async (req, res) => {
     try {
-        // const result = await FriendRequest.find({})
-        // console.log(result)
-        // successHandler(res, constants.FOUND_ALL_FRIEND_REQ_LIST, result)
+        const result = await FriendRequest.find({})
+        console.log(result)
+        successHandler(res, constants.FOUND_ALL_FRIEND_REQ_LIST, result)
     } catch (error) {
         errorHandler(res, error)
     }
