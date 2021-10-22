@@ -8,7 +8,11 @@ const constants = {
     LOGINPASSFAIL: 'Login fail',
     SUCCESS_VERIFY_MSG: 'Token verified successfully',
     SUCCESS_SEARCHING_MSG: 'Found record',
+    SUCCESS_SENT_FRIEND_REQ: 'Friend request sent successfully',
+    INVALID_REQ_ID: 'Invalid id',
+    FOUND_ALL_FRIEND_REQ_LIST: 'Found all friends',
     TRUNCATE_SUCC_MSG: 'Truncate record successfully'
+
 }
 
 module.exports = Object.freeze(constants)

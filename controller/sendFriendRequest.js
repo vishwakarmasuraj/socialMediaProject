@@ -1,4 +1,6 @@
 const FriendRequest = require('../models/friendsRequest')
+const { successHandler, errorHandler } = require('./../helper/responseHandler')
+const constants = require('./../constant/user')
 const jwt = require('jsonwebtoken')
 
 
@@ -19,11 +21,21 @@ const sendFriendRequest = async (req, res) => {
     try {
         console.log(req.body)
         const result = await new FriendRequest(req.body)
-        console.log(result)
-        res.status(200).json({ message: 'Friend request sent successfully', result })
+        await result.save()
+        successHandler(res, constants.SUCCESS_SENT_FRIEND_REQ, result)
     } catch (error) {
-        return res.status(500).json({ message: 'something went wrong' })
+        errorHandler(res, constants.INVALID_REQ_ID)
     }
 }
 
-module.exports = { verifyToken, sendFriendRequest }
+const friendRequestListing = async (req, res) => {
+    try {
+        const result = await FriendRequest.find({})
+        console.log(result)
+        successHandler(res, constants.FOUND_ALL_FRIEND_REQ_LIST, result)
+    } catch (error) {
+        errorHandler(res, error)
+    }
+}
+
+module.exports = { verifyToken, sendFriendRequest, friendRequestListing }

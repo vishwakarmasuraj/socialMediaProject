@@ -27,7 +27,7 @@ const userListing = async (req, res) => {
         const result = await User.find({})
         successHandler(res, constants.GET_LISTING, result)
     } catch (error) {
-        errorHandler(res, error)
+        return errorHandler(res, error)
     }
 }
 
