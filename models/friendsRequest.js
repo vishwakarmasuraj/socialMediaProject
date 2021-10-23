@@ -7,8 +7,8 @@ const FriendRequest = new Schema({
         type: Schema.Types.ObjectId, ref: 'Users'
     },
     requestTo: {
-        type: Schema.Types.ObjectId, ref: 'Users',
-        required: true,
+        type: Schema.Types.ObjectId, ref: 'Users'
+
 
     },
     status: {
