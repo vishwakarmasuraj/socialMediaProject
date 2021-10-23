@@ -1,13 +1,14 @@
-const { successHandler, errorHandler } = require('../helper/responseHandler')
+const { successHandler } = require('../helper/responseHandler')
 const constants = require('../constant/allConstants')
 const jwt = require('jsonwebtoken')
+const config = process.env
 
 const verifyToken = async (req, res, next) => {
     try {
         let token = req.headers.authorization
-        let result = await jwt.verify(token, process.env.SECRETKEY)
+        let result = await jwt.verify(token, config.SECRETKEY)
         successHandler(res, constants.SUCCESS_VERIFY_MSG, result)
-        next()
+        return next()
     } catch (error) {
         console.log(error)
         return res.status(404).json({ message: 'Invalid token' })

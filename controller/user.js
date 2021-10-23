@@ -1,8 +1,12 @@
 const User = require('../models/user')
+const FriendRequest = require('../models/friendsRequest')
 const { successHandler, errorHandler } = require('../helper/responseHandler')
 const constants = require('../constant/allConstants')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+
+const config = process.env
+
 
 /**
  * 
@@ -82,7 +86,7 @@ const searchAnotherUserRecord = async (req, res) => {
 const verifyToken = async (req, res, next) => {
     try {
         let token = req.headers.authorization
-        let result = await jwt.verify(token, process.env.SECRETKEY)
+        let result = await jwt.verify(token, config.SECRETKEY)
         successHandler(res, constants.SUCCESS_VERIFY_MSG, result)
         next()
     } catch (error) {
@@ -90,6 +94,17 @@ const verifyToken = async (req, res, next) => {
         return res.status(404).json({ message: 'Invalid token' })
     }
 }
+
+// const requestSend = async (req, res) => {
+//     try {
+//         console.log(req.body)
+//         const result = await new FriendRequest(req.body)
+//         await result.save()
+//         successHandler(res, constants.SUCCESS_SENT_FRIEND_REQ, result)
+//     } catch (error) {
+//         return errorHandler(res, error)
+//     }
+// }
 
 
 const userTruncate = async (req, res) => {
