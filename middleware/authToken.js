@@ -8,7 +8,7 @@ const verifyToken = async (req, res, next) => {
         let token = req.headers.authorization
         let result = await jwt.verify(token, config.SECRETKEY)
         successHandler(res, constants.SUCCESS_VERIFY_MSG, result)
-        return next()
+        next()
     } catch (error) {
         console.log(error)
         return res.status(404).json({ message: 'Invalid token' })
