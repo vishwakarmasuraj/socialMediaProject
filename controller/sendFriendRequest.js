@@ -6,10 +6,8 @@ const constants = require('./../constant/allConstants')
 
 const requestSend = async (req, res) => {
     try {
-        console.log(req.body)
-        const result = await new FriendRequest({
-            requestTo: req.body.requestTo
-        })
+        console.log(req.userData)
+        const result = await new FriendRequest(req.body)
         await result.save()
         successHandler(res, constants.SUCCESS_SENT_FRIEND_REQ, result)
     } catch (error) {
@@ -19,9 +17,7 @@ const requestSend = async (req, res) => {
 
 const requestedList = async (req, res) => {
     try {
-        const id = req.params.id
-        const result = await FriendRequest.findOne({ _id: id })
-        console.log('result--', result)
+        const result = await FriendRequest.find({}).populate({ path: 'Users' })
         successHandler(res, constants.FOUND_ALL_FRIEND_REQ_LIST, result)
     } catch (error) {
         return errorHandler(res, error)
