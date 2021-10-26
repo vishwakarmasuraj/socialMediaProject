@@ -8,7 +8,7 @@ const sendReqController = require('../controller/sendFriendRequest')
 router.post('/sendReq', authToken.verifyToken, sendReqController.requestSend)
 
 
-router.get('/requestList', authToken.verifyToken, sendReqController.requestedList)
+router.get('/requestList/:_id', authToken.verifyToken, sendReqController.requestedList)
 
 
 
