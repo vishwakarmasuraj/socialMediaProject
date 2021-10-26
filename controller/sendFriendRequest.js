@@ -7,7 +7,7 @@ const constants = require('./../constant/allConstants')
 const requestSend = async (req, res) => {
     try {
         console.log(req.userData)
-        const result = await new FriendRequest({ requestTo: req.body.requestTo })
+        const result = await new FriendRequest({ requestFrom: req.userData._id, requestTo: req.userData._id })
         await result.save()
         successHandler(res, constants.SUCCESS_SENT_FRIEND_REQ, result)
     } catch (error) {
@@ -17,14 +17,12 @@ const requestSend = async (req, res) => {
 
 const requestedList = async (req, res) => {
     try {
-        req.userData = { _id: req.userId }
-        console.log("req.userData.id", req.userData._id)
-        const result = await FriendRequest.find(req.userData._id).populate('Users')
+        console.log("req.userData._id", req.userData._id)
+        const result = await FriendRequest.find({ requestTo: req.userData._id })
         successHandler(res, constants.FOUND_ALL_FRIEND_REQ_LIST, result)
     } catch (error) {
         return errorHandler(res, error)
     }
 }
-
 
 module.exports = { requestSend, requestedList }

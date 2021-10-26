@@ -95,18 +95,6 @@ const verifyToken = async (req, res, next) => {
     }
 }
 
-// const requestSend = async (req, res) => {
-//     try {
-//         console.log(req.body)
-//         const result = await new FriendRequest(req.body)
-//         await result.save()
-//         successHandler(res, constants.SUCCESS_SENT_FRIEND_REQ, result)
-//     } catch (error) {
-//         return errorHandler(res, error)
-//     }
-// }
-
-
 const userTruncate = async (req, res) => {
     try {
         await User.remove({})
