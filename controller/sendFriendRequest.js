@@ -17,15 +17,14 @@ const requestSend = async (req, res) => {
 
 const requestedList = async (req, res) => {
     try {
-        req.userData = { id: req.userId }
-        console.log("req.userData.id", req.userData.id)
-        const result = await FriendRequest.find(req.userData.id).populate('Users')
+        req.userData = { _id: req.userId }
+        console.log("req.userData.id", req.userData._id)
+        const result = await FriendRequest.find(req.userData._id).populate('Users')
         successHandler(res, constants.FOUND_ALL_FRIEND_REQ_LIST, result)
     } catch (error) {
         return errorHandler(res, error)
     }
 }
-
 
 
 module.exports = { requestSend, requestedList }
