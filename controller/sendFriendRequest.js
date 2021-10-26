@@ -7,7 +7,7 @@ const constants = require('./../constant/allConstants')
 const requestSend = async (req, res) => {
     try {
         console.log(req.userData)
-        const result = await new FriendRequest({ requestFrom: req.userData._id, requestTo: req.userData._id })
+        const result = await new FriendRequest({ requestFrom: req.body._id, requestTo: req.body._id })
         await result.save()
         successHandler(res, constants.SUCCESS_SENT_FRIEND_REQ, result)
     } catch (error) {
