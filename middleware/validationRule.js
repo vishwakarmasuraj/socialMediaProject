@@ -5,7 +5,7 @@ const User = require('../models/user')
 const validationRule = () => {
     return [
         body('title').notEmpty(),
-        body('firstName').notEmpty()
+        body('firstName').notEmpty().isLength({ max: 100 })
             .custom(value => {
                 return User.findOne({ firstName: value }).then(data => {
                     if (data) {
@@ -13,7 +13,7 @@ const validationRule = () => {
                     }
                 })
             }),
-        body('lastName').notEmpty(),
+        body('lastName').notEmpty().isLength({ max: 100 }),
         body('email').isEmail()
             .custom(value => {
                 return User.findOne({ email: value }).then(data => {

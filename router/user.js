@@ -18,6 +18,8 @@ router.get('/findAllRecord', userController.searchAnotherUserRecord)
 
 router.get('/verify', userController.verifyToken)
 
+router.get('/logout/:_id', userController.userLogout)
+
 router.delete('/truncate', userController.userTruncate)
 
 // router.post('/sendReq', userController.requestSend)

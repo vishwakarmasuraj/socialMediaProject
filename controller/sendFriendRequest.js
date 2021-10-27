@@ -26,4 +26,12 @@ const requestedList = async (req, res) => {
     }
 }
 
-module.exports = { requestSend, requestedList }
+const requestAccept = async (req, res) => {
+    try {
+
+    } catch (error) {
+
+    }
+}
+
+module.exports = { requestSend, requestedList, requestAccept }
