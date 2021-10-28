@@ -95,13 +95,6 @@ const verifyToken = async (req, res, next) => {
     }
 }
 
-const userLogout = async (req, res) => {
-    try {
-
-    } catch (error) {
-
-    }
-}
 
 const userTruncate = async (req, res) => {
     try {
@@ -113,4 +106,4 @@ const userTruncate = async (req, res) => {
 }
 
 
-module.exports = { addUser, userListing, userTruncate, userLogin, searchAnotherUserRecord, verifyToken, userLogout }
+module.exports = { addUser, userListing, userTruncate, userLogin, searchAnotherUserRecord, verifyToken }
