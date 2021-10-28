@@ -34,12 +34,14 @@ const knowStatus = async (req, res) => {
     try {
         console.log(req.params._id)
         let _id = req.params._id
-        const result = await FriendRequest.updateOne({ _id: _id }, { $set: { status: req.body.status } })
+        const result = await FriendRequest.updateMany({ _id: _id }, { $set: { status: req.body.status, message: req.body.message } })
         res.status(200).json({ msg: 'status updated', result })
     } catch (error) {
         console.log(error)
         return res.status(500).json({ msg: 'something went wrong' })
     }
 }
+
+
 
 module.exports = { requestSend, requestedList, knowStatus }
