@@ -34,7 +34,8 @@ const knowStatus = async (req, res) => {
     try {
         console.log(req.params._id)
         let _id = req.params._id
-        const result = await FriendRequest.updateMany({ _id: _id }, { $set: { status: req.body.status, message: req.body.message } })
+        const result = await FriendRequest.findByIdAndUpdate
+            ({ _id: _id }, { $set: { status: req.body.status, message: req.body.message } })
         res.status(200).json({ msg: 'status updated', result })
     } catch (error) {
         console.log(error)
@@ -42,6 +43,23 @@ const knowStatus = async (req, res) => {
     }
 }
 
+const userChatAndSendFile = async (req, res, next) => {
+    try {
+        const option = {
+            root: Path.join(__dirname)
+        };
+        const fileName = hello.txt;
+        res.status(200).sendFile(fileName, option, (err) => {
+            if (err) {
+                next(err)
+            } else {
+                console.log('Sent', fileName)
+            }
+        })
+    } catch (error) {
+
+    }
+}
 
 
-module.exports = { requestSend, requestedList, knowStatus }
+module.exports = { requestSend, requestedList, knowStatus, userChatAndSendFile }
