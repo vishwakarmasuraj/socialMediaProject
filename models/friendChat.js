@@ -12,10 +12,14 @@ const FriendChat = new Schema({
     },
     message: {
         type: String,
+    },
+    messageType: {
+        type: String,
         enum: ['txt', 'jpg', 'mp3']
     },
     url: {
         type: String,
+
     }
 }, { timestamps: true })
 

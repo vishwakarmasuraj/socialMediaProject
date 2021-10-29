@@ -1,18 +1,17 @@
-const FriendRequest = require('../models/friendsRequest')
-const { successHandler, errorHandler } = require('./../helper/responseHandler')
-const constants = require('./../constant/allConstants')
-
+const FriendChat = require('../models/friendChat')
+const multer = require('multer')
 
 const userChatAndSendFile = async (req, res) => {
     try {
-        const result = await new FriendRequest({
-            fromUserId: req.params.fromUserId,
+        console.log(req.userData)
+        const result = await new FriendChat({
+            fromUserId: req.userData._id,
             toUserId: req.body.toUserId,
             message: req.body.message,
             url: req.body.url
         })
         await result.save()
-        res.status(200).json({ message: 'Chating start' })
+        res.status(200).json({ message: 'Chating start', result })
     } catch (error) {
         console.log(error)
         return res.status(500).json({ message: 'something went wrong' })

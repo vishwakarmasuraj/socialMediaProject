@@ -13,6 +13,4 @@ router.get('/requestList/:_id', authToken.verifyToken, sendReqController.request
 
 router.put('/updateStatus/:_id', reqValidationRule.requestRule(), reqValidation.validate, authToken.verifyToken, sendReqController.knowStatus)
 
-router.get('/', sendReqController.userChatAndSendFile)
-
 module.exports = router
