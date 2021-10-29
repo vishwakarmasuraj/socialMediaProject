@@ -85,19 +85,6 @@ const searchAnotherUserRecord = async (req, res) => {
     }
 }
 
-const verifyToken = async (req, res, next) => {
-    try {
-        let token = req.headers.authorization
-        let result = await jwt.verify(token, config.SECRETKEY)
-        successHandler(res, constants.SUCCESS_VERIFY_MSG, result)
-        next()
-    } catch (error) {
-        console.log(error)
-        return res.status(404).json({ message: 'Invalid token' })
-    }
-}
-
-
 const userTruncate = async (req, res) => {
     try {
         await User.remove({})
@@ -109,4 +96,4 @@ const userTruncate = async (req, res) => {
 
 
 
-module.exports = { addUser, userListing, userTruncate, userLogin, searchAnotherUserRecord, verifyToken }
+module.exports = { addUser, userListing, userTruncate, userLogin, searchAnotherUserRecord }

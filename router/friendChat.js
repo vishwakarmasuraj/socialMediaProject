@@ -12,6 +12,4 @@ router.post('/chatTogether', chatValidationRule.friendChatValidationRule(), chat
 
 router.get('/seeMessage/:_id', authToken.verifyToken, chatController.seeMessageFromChat)
 
-router.put('/logout', authToken.verifyToken, chatController.friendLogout)
-
 module.exports = router

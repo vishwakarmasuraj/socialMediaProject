@@ -48,4 +48,16 @@ const knowStatus = async (req, res) => {
     }
 }
 
-module.exports = { requestSend, requestedList, knowStatus }
+const seeMyFriendList = async (req, res) => {
+    try {
+        const result = await FriendRequest.find().populate({
+            path: 'status', $in: { status: new RegExp('.*A.*', 'i') }
+        })
+        console.log(result)
+        res.status(200).json({ message: 'Found my friend list', result })
+    } catch (error) {
+        res.status(500).json({ message: 'something went wrong' })
+    }
+}
+
+module.exports = { requestSend, requestedList, knowStatus, seeMyFriendList }
