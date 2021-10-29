@@ -11,7 +11,7 @@ const constants = {
     SUCCESS_SENT_FRIEND_REQ: 'Friend request sent successfully',
     INVALID_REQ_ID: 'Invalid id',
     FOUND_ALL_FRIEND_REQ_LIST: 'Found all friends',
-    AUDIO_FORMAT_ERR: 'Only given file type format allowed!',
+    FILE_FORMAT_ERR: 'Only given file type format allowed!',
     TRUNCATE_SUCC_MSG: 'Truncate record successfully'
 
 }

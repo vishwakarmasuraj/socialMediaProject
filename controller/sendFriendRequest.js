@@ -9,7 +9,6 @@ const requestSend = async (req, res) => {
         if (req.userData._id === req.body.requestTo) {
             return res.status(200).json({ msg: 'you can not send friend request yourself' })
         }
-        console.log(req.userData)
         const result = await new FriendRequest({ requestFrom: req.userData._id, requestTo: req.body.requestTo })
         await result.save()
         successHandler(res, constants.SUCCESS_SENT_FRIEND_REQ, result)
@@ -20,7 +19,6 @@ const requestSend = async (req, res) => {
 
 const requestedList = async (req, res) => {
     try {
-        console.log(req.params)
         let _id = req.params._id
         const result = await FriendRequest.find({ requestTo: _id }).populate('requestFrom', '-password')
         res.status(200).json({ msg: 'Found record', result })
@@ -32,7 +30,6 @@ const requestedList = async (req, res) => {
 
 const knowStatus = async (req, res) => {
     try {
-        console.log(req.params._id)
         let _id = req.params._id
         const result = await FriendRequest.findByIdAndUpdate
             ({ _id: _id }, { $set: { status: req.body.status, message: req.body.message } })

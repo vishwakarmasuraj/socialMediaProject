@@ -4,42 +4,15 @@ const constants = require('../constant/allConstants')
 
 const userChatAndSendFile = async (req, res) => {
     try {
-        console.log(req.userData)
+        if (req.userData._id === req.body.toUserId) {
+            res.status(200).json({ message: 'you can not send message yourself' })
+        }
         const result = await new FriendChat({
             fromUserId: req.userData._id,
             toUserId: req.body.toUserId,
             message: req.body.message,
+            messageType: req.body.messageType,
             url: req.body.url
-        })
-        const storage = multer.diskStorage({
-            destination: function (req, file, cb) {
-                if (
-                    file.mimetype == 'txt' ||
-                    file.mimetype == 'FLAC' ||
-                    file.mimetype == 'MP3' ||
-                    file.mimetype == ' WAV' ||
-                    file.mimetype == 'MP4' ||
-                    file.mimetype == 'WMA' ||
-                    file.mimetype ||
-                    'AAC'
-                ) {
-                    cb(null, true)
-                } else {
-                    cb(null, false)
-                    return cb(new Error(constants.AUDIO_FORMAT_ERR))
-                }
-                cb(null, __dirname + './../uploads')
-            },
-            filename: function (req, file, cb) {
-                cb(null, file.originalname)
-            },
-        })
-
-        const upload = multer({
-            storage: storage,
-            onFileUploadStart: function (file) {
-                console.log(file.originalname + ' is starting ...')
-            },
         })
         await result.save()
         res.status(200).json({ message: 'Chating start', result })
@@ -49,4 +22,13 @@ const userChatAndSendFile = async (req, res) => {
     }
 }
 
-module.exports = { userChatAndSendFile }
+const seeMessageFromChat = async (req, res) => {
+    try {
+        const result = await FriendChat.find({ toUserId: _id }).populate('fromUserId', '-password')
+        res.status(200).json({ message: 'Found all message', result })
+    } catch (error) {
+        return res.status(500).json({ message: 'something went wrong' })
+    }
+}
+
+module.exports = { userChatAndSendFile, seeMessageFromChat }

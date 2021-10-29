@@ -10,4 +10,6 @@ const chatController = require('../controller/friendChat')
 
 router.post('/chatTogether', chatValidationRule.friendChatValidationRule(), chatValidation.validate, authToken.verifyToken, chatController.userChatAndSendFile)
 
+router.get('/seeMessage/:_id', authToken.verifyToken, chatController.seeMessageFromChat)
+
 module.exports = router
