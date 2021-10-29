@@ -2,7 +2,15 @@ const FriendRequest = require('../models/friendsRequest')
 const { successHandler, errorHandler } = require('./../helper/responseHandler')
 const constants = require('./../constant/allConstants')
 
-
+/**
+ * 
+ * @param {*} req is object that contain all body object.
+ * @param {*} res is response object that handle response object.
+ * @returns   requestSend is function that sending friend request to another user
+ *            requestedList is function that listing of all friend requested to another user.
+ *            knowStatus is function that decides that user is Accept, Decline, Open, Close
+ *            
+ */
 
 const requestSend = async (req, res) => {
     try {

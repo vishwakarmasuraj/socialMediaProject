@@ -10,8 +10,9 @@ const config = process.env
 
 /**
  * 
- * @param {*} req 
- * @param {*} res 
+ * @param {*} req is request object that responsible for contaion all body object in it.
+ * @param {*} res is response object that is responsible for sending response object.
+ * 
  */
 
 

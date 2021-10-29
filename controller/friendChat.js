@@ -1,6 +1,14 @@
 const FriendChat = require('../models/friendChat')
-const multer = require('multer')
 const constants = require('../constant/allConstants')
+
+/**
+ * 
+ * @param {*} req is object that contain whole records of object.
+ * @param {*} res  is response object.
+ *            userChatAndSendFile function is handling chatting.
+ *            seeMessageFromChat function is handling showing chatting information.
+ * @returns 
+ */
 
 const userChatAndSendFile = async (req, res) => {
     try {
