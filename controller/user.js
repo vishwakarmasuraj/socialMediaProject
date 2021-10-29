@@ -94,6 +94,4 @@ const userTruncate = async (req, res) => {
     }
 }
 
-
-
 module.exports = { addUser, userListing, userTruncate, userLogin, searchAnotherUserRecord }
