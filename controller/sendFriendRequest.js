@@ -43,23 +43,4 @@ const knowStatus = async (req, res) => {
     }
 }
 
-const userChatAndSendFile = async (req, res, next) => {
-    try {
-        const option = {
-            root: Path.join(__dirname)
-        };
-        const fileName = hello.txt;
-        res.status(200).sendFile(fileName, option, (err) => {
-            if (err) {
-                next(err)
-            } else {
-                console.log('Sent', fileName)
-            }
-        })
-    } catch (error) {
-
-    }
-}
-
-
-module.exports = { requestSend, requestedList, knowStatus, userChatAndSendFile }
+module.exports = { requestSend, requestedList, knowStatus }
