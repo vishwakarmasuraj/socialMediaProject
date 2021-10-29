@@ -39,4 +39,14 @@ const seeMessageFromChat = async (req, res) => {
     }
 }
 
-module.exports = { userChatAndSendFile, seeMessageFromChat }
+const friendLogout = async (req, res) => {
+    try {
+        let token = { token: req.token }
+        await FriendChat.updateOne({ $unset: { token: token } })
+        res.status(200).json({ message: 'Logout' })
+    } catch (error) {
+        return res.status(500).json({ message: 'something went wrong' })
+    }
+}
+
+module.exports = { userChatAndSendFile, seeMessageFromChat, friendLogout }

@@ -52,10 +52,11 @@ const userLogin = async (req, res) => {
                 if (error) {
                     return errorHandler(res, constants.ERROR_MSG, error)
                 } else if (match) {
-                    return successHandler(res, constants.SUCCESSLOGIN, {
+                    successHandler(res, constants.SUCCESSLOGIN, {
                         token: generateToken(data),
                         data,
                     })
+
                 } else {
                     return errorHandler(res, constants.LOGINPASSFAIL)
                 }
@@ -105,5 +106,7 @@ const userTruncate = async (req, res) => {
         errorHandler(res, error)
     }
 }
+
+
 
 module.exports = { addUser, userListing, userTruncate, userLogin, searchAnotherUserRecord, verifyToken }
