@@ -20,7 +20,12 @@ const addUser = async (req, res) => {
     try {
         req.body.password = await bcrypt.hash(req.body.password, constants.ROUND)
         const user = await new User(req.body)
-        await user.save()
+        await user.save((error) => {
+            if (error) {
+                return console.log(`Error has occurred: ${ error }`)
+            }
+            console.log('Document is successfully saved.')
+        })
         successHandler(res, constants.USER_CREATED_MSG)
     } catch (error) {
         errorHandler(res, error)
@@ -44,6 +49,9 @@ generateToken = (user) => {
 
 const userLogin = async (req, res) => {
     try {
+        if (!req.body.email || req.body.password == '') {
+            res.status(400).json({ message: 'Valid email and password are required' })
+        }
         let data = await User.findOne({ email: req.body.email })
         if (!data) {
             return errorHandler(res, constants.EMAILLOGIN_ERR)
