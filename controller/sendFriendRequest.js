@@ -50,8 +50,11 @@ const knowStatus = async (req, res) => {
 
 const seeMyFriendList = async (req, res) => {
     try {
-        const result = await FriendRequest.find().populate({
-            path: 'status', $in: { status: new RegExp('.*A.*', 'i') }
+        let { friend = "" } = req.query
+        const result = await FriendRequest.find({
+            $or: [
+                { $or: [{ status: { $in: [friend] } }] },
+            ]
         })
         console.log(result)
         res.status(200).json({ message: 'Found my friend list', result })
