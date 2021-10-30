@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
+const authUser = require('../middleware/authToken')
 const userValidateRule = require('../middleware/validationRule')
 const valid = require('../middleware/valid')
 
@@ -13,6 +14,8 @@ router.get('/api/list', userController.userListing)
 router.post('/api/login', userController.userLogin)
 
 router.get('/findAllRecord', userController.searchAnotherUserRecord)
+
+router.put('/logout', authUser.verifyToken, userController.userLogout)
 
 router.delete('/truncate', userController.userTruncate)
 

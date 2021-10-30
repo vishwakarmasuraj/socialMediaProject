@@ -12,7 +12,12 @@ const config = process.env
  * 
  * @param {*} req is request object that responsible for contaion all body object in it.
  * @param {*} res is response object that is responsible for sending response object.
- * 
+ *            addUser - This is function which is responsible for Signup user.
+ *            userListing - This is function which is responsible for getting all signup listing.
+ *            userLogin - This is function which is responsible for user login.
+ *            searchAnotherUserRecord - This is function which is responsible for one user can search another user's record.
+ *            userLogout - This is a function which is responsible for logout.
+ *            userTruncate - This is function which is responsible for truncate database.
  */
 
 
@@ -93,6 +98,16 @@ const searchAnotherUserRecord = async (req, res) => {
     }
 }
 
+const userLogout = async (req, res) => {
+    try {
+        req.userData = { token: req.token }
+        const result = await User.update({ token: req.userData.token })
+        res.status(200).json({ message: 'User is successfully logout', result })
+    } catch (error) {
+        return res.status(500).json({ message: 'somthing went wrong' })
+    }
+}
+
 const userTruncate = async (req, res) => {
     try {
         await User.remove({})
@@ -102,4 +117,4 @@ const userTruncate = async (req, res) => {
     }
 }
 
-module.exports = { addUser, userListing, userTruncate, userLogin, searchAnotherUserRecord }
+module.exports = { addUser, userListing, userTruncate, userLogin, searchAnotherUserRecord, userLogout }
