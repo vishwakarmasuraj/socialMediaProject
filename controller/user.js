@@ -1,5 +1,4 @@
 const User = require('../models/user')
-const FriendRequest = require('../models/friendsRequest')
 const { successHandler, errorHandler } = require('../helper/responseHandler')
 const constants = require('../constant/allConstants')
 const bcrypt = require('bcrypt')
