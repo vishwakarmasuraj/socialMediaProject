@@ -15,4 +15,6 @@ router.put('/updateStatus/:_id', reqValidationRule.requestRule(), reqValidation.
 
 router.get('/myFriendList', sendReqController.seeMyFriendList)
 
+router.delete('/unfriend/:_id', authToken.verifyToken, sendReqController.userCanUnFriend)
+
 module.exports = router

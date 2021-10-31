@@ -8,8 +8,7 @@ const constants = require('./../constant/allConstants')
  * @param {*} res is response object that handle response object.
  * @returns   requestSend is function that sending friend request to another user
  *            requestedList is function that listing of all friend requested to another user.
- *            knowStatus is function that decides that user is Accept, Decline, Open, Close
- *            
+ *            knowStatus is function that decides that user is Accept, Decline, Open, Close      
  */
 
 const requestSend = async (req, res) => {
@@ -48,6 +47,16 @@ const knowStatus = async (req, res) => {
     }
 }
 
+const userCanUnFriend = async (req, res) => {
+    try {
+        let _id = req.params._id
+        await FriendRequest.deleteOne({ _id: _id })
+        successHandler(res, constants.UNFRIEND_MSG)
+    } catch (error) {
+        return res.status(500).json({ message: 'something went wrong' })
+    }
+}
+
 const seeMyFriendList = async (req, res) => {
     try {
         let { friend = "" } = req.query
@@ -63,4 +72,4 @@ const seeMyFriendList = async (req, res) => {
     }
 }
 
-module.exports = { requestSend, requestedList, knowStatus, seeMyFriendList }
+module.exports = { requestSend, requestedList, knowStatus, seeMyFriendList, userCanUnFriend }
