@@ -50,7 +50,7 @@ const knowStatus = async (req, res) => {
 const userCanUnFriend = async (req, res) => {
     try {
         let _id = req.params._id
-        await FriendRequest.deleteOne({ _id: _id })
+        await FriendRequest.findOneAndDelete({ _id: _id })
         successHandler(res, constants.UNFRIEND_MSG)
     } catch (error) {
         return res.status(500).json({ message: 'something went wrong' })
