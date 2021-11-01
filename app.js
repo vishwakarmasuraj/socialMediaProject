@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const port = process.env.PORT
 const routes = require('./router')
 const passport = require('passport')
+const config = process.env
 
 app.use(passport.initialize());
 
@@ -14,18 +15,11 @@ app.use(bodyParser.json())
 
 app.use(routes)
 
-// mongoose.connect(process.env.DATABASE_CONNECTION).then((err) => {
-//     console.log('connected successfully')
-// })
-
-const connectDB = async () => {
-    try {
-        await mongoose.connect(process.env.DATABASE_CONNECTION)
-        console.log('connected successfully')
-    } catch (error) {
-        console.log('fail to connect',)
-    }
-}
-connectDB()
+mongoose.connect(config.DATABASE_CONNECTION).then(() => {
+    console.log('Successfully connected ')
+});
+mongoose.connection.on('error', function (err) {
+    console.log('Error: Could not connect to Database.');
+});
 
 app.listen(port, () => console.log(`Server is listening at ${ port }`))

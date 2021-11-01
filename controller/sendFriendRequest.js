@@ -28,10 +28,9 @@ const requestedList = async (req, res) => {
     try {
         let _id = req.params._id
         const result = await FriendRequest.find({ requestTo: _id }).populate('requestFrom', '-password')
-        res.status(200).json({ msg: 'Found record', result })
+        successHandler(res, constants.FRIEND_REQ_LIST_SUCCESS, result)
     } catch (error) {
-        console.log(error)
-        res.status(500).json({ msg: 'something went wrong' })
+        return errorHandler(res, error)
     }
 }
 
@@ -40,10 +39,9 @@ const knowStatus = async (req, res) => {
         let _id = req.params._id
         const result = await FriendRequest.findByIdAndUpdate
             ({ _id: _id }, { $set: { status: req.body.status, message: req.body.message } })
-        res.status(200).json({ msg: 'status updated', result })
+        successHandler(res, constants.FRD_STATUS_UPDATE_SUCCESS, result)
     } catch (error) {
-        console.log(error)
-        return res.status(500).json({ msg: 'something went wrong' })
+        return errorHandler(res, error)
     }
 }
 
@@ -53,7 +51,7 @@ const userCanUnFriend = async (req, res) => {
         await FriendRequest.findByIdAndRemove({ _id: _id })
         successHandler(res, constants.UNFRIEND_MSG)
     } catch (error) {
-        return res.status(500).json({ message: 'something went wrong' })
+        return errorHandler(res, error)
     }
 }
 
@@ -66,9 +64,9 @@ const seeMyFriendList = async (req, res) => {
             ]
         })
         console.log(result)
-        res.status(200).json({ message: 'Found my friend list', result })
+        successHandler(res, constants.FRIEND_LIST_FOUND_SUCCESS, result)
     } catch (error) {
-        res.status(500).json({ message: 'something went wrong' })
+        errorHandler(res, error)
     }
 }
 
