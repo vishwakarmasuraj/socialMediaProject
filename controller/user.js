@@ -99,9 +99,7 @@ const searchAnotherUserRecord = async (req, res) => {
 
 const userLogout = async (req, res) => {
     try {
-        req.userData = { token: req.token }
-        const result = await User.update({ token: req.userData.token })
-        res.status(200).json({ message: 'User is successfully logout', result })
+        res.status(200).json({ message: 'User is successfully logout' })
     } catch (error) {
         return res.status(500).json({ message: 'somthing went wrong' })
     }
