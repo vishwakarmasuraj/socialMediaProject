@@ -4,8 +4,6 @@ const constants = require('../constant/allConstants')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-const config = process.env
-
 
 /**
  * 
@@ -47,7 +45,7 @@ const userListing = async (req, res) => {
 
 generateToken = (user) => {
     return jwt.sign({ data: user }, process.env.SECRETKEY, {
-        expiresIn: '24h',
+        expiresIn: '2h',
     })
 }
 
@@ -97,11 +95,12 @@ const searchAnotherUserRecord = async (req, res) => {
     }
 }
 
-const userLogout = async (req, res) => {
+const myProfile = async (req, res) => {
     try {
-        res.status(200).json({ message: 'User is successfully logout' })
+        let profile = req.userData
+        res.status(200).json({ msg: 'found', profile })
     } catch (error) {
-        return res.status(500).json({ message: 'somthing went wrong' })
+        res.status(500).json({ message: 'something went wrong' })
     }
 }
 
@@ -114,4 +113,4 @@ const userTruncate = async (req, res) => {
     }
 }
 
-module.exports = { addUser, userListing, userTruncate, userLogin, searchAnotherUserRecord, userLogout }
+module.exports = { addUser, userListing, userTruncate, userLogin, searchAnotherUserRecord, myProfile }

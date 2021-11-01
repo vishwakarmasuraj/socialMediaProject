@@ -13,7 +13,7 @@ const FriendChat = new Schema({
     },
     messageType: {
         type: String,
-        enum: ['txt', 'jpg', 'MP3', 'mp4', 'AAC', 'FLAC', 'WMA', 'WAV']
+        enum: ['txt', 'jpg']
     },
     url: {
         type: String,

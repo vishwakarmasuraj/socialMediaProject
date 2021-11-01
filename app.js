@@ -12,12 +12,23 @@ app.use(passport.initialize());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-
-
 app.use(routes)
 
-mongoose.connect(process.env.DATABASE_CONNECTION).then(() => {
-    console.log('connected successfully')
-})
+// mongoose.connect(process.env.DATABASE_CONNECTION).then((err) => {
+//     console.log('connected successfully')
+// })
+
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.DATABASE_CONNECTION)
+        console.log('connected successfully')
+    } catch (error) {
+        console.log('fail to connect',)
+    }
+}
+connectDB()
+
+
+
 
 app.listen(port, () => console.log(`Server is listening at ${ port }`))

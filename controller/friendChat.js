@@ -13,7 +13,7 @@ const constants = require('../constant/allConstants')
 const userChatAndSendFile = async (req, res) => {
     try {
         if (req.userData._id === req.body.toUserId) {
-            res.status(200).json({ message: 'you can not send message yourself' })
+            res.status(200).json({ message: 'you can not send message to yourself' })
         }
         const result = await new FriendChat({
             fromUserId: req.userData._id,
