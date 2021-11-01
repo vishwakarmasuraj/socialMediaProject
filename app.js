@@ -28,7 +28,4 @@ const connectDB = async () => {
 }
 connectDB()
 
-
-
-
 app.listen(port, () => console.log(`Server is listening at ${ port }`))

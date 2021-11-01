@@ -44,7 +44,7 @@ const userListing = async (req, res) => {
 }
 
 generateToken = (user) => {
-    return jwt.sign({ data: user }, process.env.SECRETKEY, {
+    return jwt.sign({ data: user }, process.env.SECRET_KEY, {
         expiresIn: '2h',
     })
 }
@@ -98,7 +98,7 @@ const searchAnotherUserRecord = async (req, res) => {
 const myProfile = async (req, res) => {
     try {
         let profile = req.userData
-        res.status(200).json({ msg: 'found', profile })
+        res.status(200).json({ message: 'Your profile found', profile })
     } catch (error) {
         res.status(500).json({ message: 'something went wrong' })
     }
