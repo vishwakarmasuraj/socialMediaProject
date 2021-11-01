@@ -98,7 +98,7 @@ const searchAnotherUserRecord = async (req, res) => {
 const myProfile = async (req, res) => {
     try {
         let profile = req.userData
-        res.status(200).json({ message: 'Your profile found', profile })
+        res.status(200).json({ message: 'found', profile })
     } catch (error) {
         res.status(500).json({ message: 'something went wrong' })
     }
