@@ -13,6 +13,10 @@ const constants = {
     FOUND_ALL_FRIEND_REQ_LIST: 'Found all friends',
     UNFRIEND_MSG: 'Unfriend is successfull',
     FILE_FORMAT_ERR: 'Only given file type format allowed!',
+    PROFILE_FOUND: 'Your profile found',
+    FRIEND_REQ_LIST_SUCCESS: 'Friend request list Found',
+    FRD_STATUS_UPDATE_SUCCESS: 'Friend status updated',
+    FRIEND_LIST_FOUND_SUCCESS: 'My friend list found',
     TRUNCATE_SUCC_MSG: 'Truncate record successfully'
 
 }
