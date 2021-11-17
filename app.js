@@ -13,7 +13,7 @@ app.use(passport.initialize());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.use(routes)
+app.use('/api', routes)
 
 mongoose.connect(config.DATABASE_CONNECTION).then(() => {
     console.log('Successfully connected ')
